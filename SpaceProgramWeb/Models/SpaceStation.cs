@@ -14,7 +14,7 @@ namespace SpaceProgramWeb.Models
 
         [Required]
         [Display(Name = "List of all officers")]
-        public List<Officer> OfficerList { get; set; }
+        public ICollection<Officer> OfficerList { get; set; }
 
         public SpaceStation()
         {

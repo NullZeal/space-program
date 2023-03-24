@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SpaceProgramApi.Models;
+using System.Diagnostics;
 
 namespace SpaceProgramApi.Data
 {

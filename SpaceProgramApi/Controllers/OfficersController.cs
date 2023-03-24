@@ -81,15 +81,16 @@ namespace SpaceProgramApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Officer>> PostOfficer(Officer officer)
         {
-          if (_context.Officer == null)
-          {
-              return Problem("Entity set 'SpaceProgramApiContext.Officer'  is null.");
-          }
+            if (_context.Officer == null)
+            {
+                return Problem("Entity set 'SpaceProgramApiContext.Officer'  is null.");
+            }
 
-          if (_context.Officer.Any(x => x.Name == officer.Name))
-          {
-              return Problem("Officer name already exists.");
-          }
+            if (_context.Officer.Any(x => x.Name == officer.Name))
+            {
+                return Problem("Officer name already exists.");
+            }
+
 
             _context.Officer.Add(officer);
             await _context.SaveChangesAsync();

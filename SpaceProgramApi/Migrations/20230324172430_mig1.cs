@@ -16,7 +16,7 @@ namespace SpaceProgramApi.Migrations
                 columns: table => new
                 {
                     SpaceStationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,7 +28,7 @@ namespace SpaceProgramApi.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -41,7 +41,7 @@ namespace SpaceProgramApi.Migrations
                 columns: table => new
                 {
                     OfficerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Rank = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SpaceStationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -57,9 +57,27 @@ namespace SpaceProgramApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Officer_Name",
+                table: "Officer",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Officer_SpaceStationId",
                 table: "Officer",
                 column: "SpaceStationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SpaceStation_Name",
+                table: "SpaceStation",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_Username",
+                table: "User",
+                column: "Username",
+                unique: true);
         }
 
         /// <inheritdoc />

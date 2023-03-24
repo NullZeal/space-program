@@ -1,5 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SpaceProgramApi.Models
 {
@@ -13,9 +12,8 @@ namespace SpaceProgramApi.Models
         [Display(Name = "Station Name")]
         public string Name { get; set; }
 
-        [Required]
         [Display(Name = "List of all officers")]
-        public List<Officer> OfficerList { get; set; }
+        public virtual ICollection<Officer> OfficerList { get; set; }
 
         public SpaceStation()
         {

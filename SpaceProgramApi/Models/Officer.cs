@@ -6,7 +6,6 @@ namespace SpaceProgramApi.Models
     public class Officer
     {
         [Key]
-        [Required]
         [Display(Name = "Officer Badge Number")]
         public Guid OfficerId { get; set; }
 
@@ -19,7 +18,9 @@ namespace SpaceProgramApi.Models
         public string Rank { get; set; }
 
         [ForeignKey("SpaceStationId")]
-        public Guid SpaceStationId{ get; set; }
+        public Guid SpaceStationId { get; set; }
+
+        public virtual SpaceStation SpaceStation { get; set; }
 
         public Officer()
         {

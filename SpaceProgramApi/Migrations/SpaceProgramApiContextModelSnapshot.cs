@@ -94,11 +94,13 @@ namespace SpaceProgramApi.Migrations
 
             modelBuilder.Entity("SpaceProgramApi.Models.Officer", b =>
                 {
-                    b.HasOne("SpaceProgramApi.Models.SpaceStation", null)
+                    b.HasOne("SpaceProgramApi.Models.SpaceStation", "SpaceStation")
                         .WithMany("OfficerList")
                         .HasForeignKey("SpaceStationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("SpaceStation");
                 });
 
             modelBuilder.Entity("SpaceProgramApi.Models.SpaceStation", b =>

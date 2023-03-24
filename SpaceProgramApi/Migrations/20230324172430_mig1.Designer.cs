@@ -12,8 +12,8 @@ using SpaceProgramApi.Data;
 namespace SpaceProgramApi.Migrations
 {
     [DbContext(typeof(SpaceProgramApiContext))]
-    [Migration("20230323213627_mig2")]
-    partial class mig2
+    [Migration("20230324172430_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,11 +97,13 @@ namespace SpaceProgramApi.Migrations
 
             modelBuilder.Entity("SpaceProgramApi.Models.Officer", b =>
                 {
-                    b.HasOne("SpaceProgramApi.Models.SpaceStation", null)
+                    b.HasOne("SpaceProgramApi.Models.SpaceStation", "SpaceStation")
                         .WithMany("OfficerList")
                         .HasForeignKey("SpaceStationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("SpaceStation");
                 });
 
             modelBuilder.Entity("SpaceProgramApi.Models.SpaceStation", b =>
