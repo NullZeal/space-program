@@ -10,7 +10,9 @@ namespace SpaceProgramApi.Controllers
         [HttpGet]
         public IActionResult Echo()
         {
-            return Ok("Echo Gui2 " + DateTime.Now);
+            return Ok("Echo Gui4 " + DateTime.Now);
+
+
         }
     }
 }
