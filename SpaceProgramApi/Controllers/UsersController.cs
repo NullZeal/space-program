@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SpaceProgramApi.Data;
+using SpaceProgram.DataLayer.EntityFramework;
 using SpaceProgramApi.Models;
 
 namespace SpaceProgramApi.Controllers
@@ -14,9 +14,9 @@ namespace SpaceProgramApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly SpaceProgramApiContext _context;
+        private readonly SpaceProgramContext _context;
 
-        public UsersController(SpaceProgramApiContext context)
+        public UsersController(SpaceProgramContext context)
         {
             _context = context;
         }

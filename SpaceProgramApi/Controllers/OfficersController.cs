@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SpaceProgramApi.Data;
+using SpaceProgram.DataLayer.EntityFramework;
 using SpaceProgramApi.Models;
 
 namespace SpaceProgramApi.Controllers
@@ -9,9 +9,9 @@ namespace SpaceProgramApi.Controllers
     [ApiController]
     public class OfficersController : ControllerBase
     {
-        private readonly SpaceProgramApiContext _context;
+        private readonly SpaceProgramContext _context;
 
-        public OfficersController(SpaceProgramApiContext context)
+        public OfficersController(SpaceProgramContext context)
         {
             _context = context;
         }

@@ -2,11 +2,11 @@
 using SpaceProgramApi.Models;
 using System.Diagnostics;
 
-namespace SpaceProgramApi.Data
+namespace SpaceProgram.DataLayer.EntityFramework
 {
-    public class SpaceProgramApiContext : DbContext
+    public class SpaceProgramContext : DbContext
     {
-        public SpaceProgramApiContext (DbContextOptions<SpaceProgramApiContext> options)
+        public SpaceProgramContext(DbContextOptions<SpaceProgramContext> options)
             : base(options)
         {
         }

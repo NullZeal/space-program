@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SpaceProgramApi.Data;
+using SpaceProgram.DataLayer.EntityFramework;
+
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<SpaceProgramApiContext>(options =>
+builder.Services.AddDbContext<SpaceProgramContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SpaceProgramApiContext") ?? throw new InvalidOperationException("Connection string 'SpaceProgramApiContext' not found.")));
 
 // Add services to the container.
@@ -10,16 +11,8 @@ builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttri
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseHttpsRedirection();
 

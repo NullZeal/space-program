@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SpaceProgramApi.Data;
+using SpaceProgram.DataLayer.EntityFramework;
 using SpaceProgramApi.Models;
 
 namespace SpaceProgramApi.Controllers
@@ -14,9 +9,9 @@ namespace SpaceProgramApi.Controllers
     [ApiController]
     public class SpaceStationsController : ControllerBase
     {
-        private readonly SpaceProgramApiContext _context;
+        private readonly SpaceProgramContext _context;
 
-        public SpaceStationsController(SpaceProgramApiContext context)
+        public SpaceStationsController(SpaceProgramContext context)
         {
             _context = context;
         }
