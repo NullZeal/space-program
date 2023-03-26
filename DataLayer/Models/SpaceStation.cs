@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SpaceProgramApi.Models
+namespace SpaceProgram.DataLayer.Models
 {
     public class SpaceStation
     {

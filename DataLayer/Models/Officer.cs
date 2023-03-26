@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SpaceProgramApi.Models
+namespace SpaceProgram.DataLayer.Models
 {
     public class Officer
     {

@@ -2,17 +2,19 @@
 
 namespace SpaceProgramApi.Controllers
 {
-    [Route("api")]
-    [ApiController]
+    [Route("api/echo")]
     public class EchoController : ControllerBase
     {
-        [Route("echo")]
-        [HttpGet]
+        [HttpGet()]
         public IActionResult Echo()
         {
-            return Ok("Echo Gui4 " + DateTime.Now);
+            return Ok($"Echo! {DateTime.Now}");
+        }
 
-
+        [HttpGet("{dummy}")]
+        public IActionResult Echo(int dummy)
+        {
+            return Ok($"Echo! {dummy}");
         }
     }
 }
