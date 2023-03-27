@@ -1,48 +1,58 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using BusinessLayer.DtoModels;
+using BusinessLayer.Interfaces;
+using BusinessLayer.Managers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SpaceProgram.DataLayer.Interfaces;
-using SpaceProgram.DataLayer.Models;
-using SpaceProgram.DataLayer.Repositories;
 
 namespace SpaceProgramApi.Controllers
 {
     [Route("api/officer")]
     public class OfficerController : ControllerBase
     {
-        private IOfficerRepository _officerRepository = new SqlServerOfficerRepository();
+        private IOfficerManager officerManager { get; }
+
+        public OfficerController(IOfficerManager officerManager)
+        {
+            this.officerManager = officerManager;
+        }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Officer>> GetAll()
+        public ActionResult<IList<OfficerDto>> GetAll()
         {
-            return Ok(_officerRepository.GetAll());
+            var officers = officerManager.GetAll();
+
+            if (officers == null) 
+            { 
+                return NotFound(new { errorMessage = "Could not find any officers!" });
+            }
+
+            return Ok(new { officers });
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<Officer> Get(Guid id)
-        {
-            return Ok(_officerRepository.Get(id));
-        }
+        //[HttpGet("{id}")]
+        //public ActionResult<Officer> Get(Guid id)
+        //{
+        //    return Ok(_officerRepository.Get(id));
+        //}
 
-        [HttpPost]
-        public ActionResult Post([FromBody] Officer officer)
-        {
-            _officerRepository.Create(officer);
-            return Created("", officer);
-        }
+        //[HttpPost]
+        //public ActionResult Post([FromBody] Officer officer)
+        //{
+        //    _officerRepository.Create(officer);
+        //    return Created("", officer);
+        //}
 
-        [HttpPut]
-        public ActionResult Put([FromBody] Officer officer)
-        {
-            _officerRepository.Modify(officer);
-            return Ok();
-        }
+        //[HttpPut]
+        //public ActionResult Put([FromBody] Officer officer)
+        //{
+        //    _officerRepository.Modify(officer);
+        //    return Ok();
+        //}
 
-        [HttpDelete("{id}")]
-        public ActionResult Delete(Guid id)
-        {
-            _officerRepository.Delete(id);
-            return Ok();
-        }
+        //[HttpDelete("{id}")]
+        //public ActionResult Delete(Guid id)
+        //{
+        //    _officerRepository.Delete(id);
+        //    return Ok();
+        //}
     }
 }

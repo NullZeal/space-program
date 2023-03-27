@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BusinessLayer.DtoModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BusinessLayer.Interfaces
 {
-    internal interface IOfficerManager
+    public interface IOfficerManager
     {
+        IList<OfficerDto> GetAll();
+        OfficerDto Get(Guid id);
+        bool Create(OfficerDto officerDto);
+        bool Modify(OfficerDto officerDto);
+        bool Delete(Guid id);
     }
 }
