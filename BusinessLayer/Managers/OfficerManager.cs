@@ -8,18 +8,18 @@ namespace BusinessLayer.Managers;
 
 public class OfficerManager : IOfficerManager
 {
-    private IOfficerRepository _officerRepository { get; }
+    private IOfficerRepository OfficerRepository { get; }
     private IMapper Mapper { get; }
 
     public OfficerManager(IOfficerRepository officerRepository, IMapper mapper)
     {
-        _officerRepository = new SqlServerOfficerRepository();
+        OfficerRepository = officerRepository;
         Mapper = mapper;
     }
 
     public IList<OfficerDto> GetAll()
     {
-        var response = _officerRepository.GetAll();
+        var response = OfficerRepository.GetAll();
         return Mapper.Map<IList<OfficerDto>>(response);
     }
 

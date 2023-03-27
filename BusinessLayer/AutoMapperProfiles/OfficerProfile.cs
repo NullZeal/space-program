@@ -6,7 +6,7 @@ namespace SpaceProgram.BusinessLayer.AutoMapperProfiles
 {
     public class OfficerProfile : Profile
     {
-        public OfficerProfile() 
+        public OfficerProfile()
         {
             CreateMap<OfficerDto, Officer>()
                 .ForMember(destination => destination.OfficerId, opt => opt.MapFrom(src => src.OfficerId))
