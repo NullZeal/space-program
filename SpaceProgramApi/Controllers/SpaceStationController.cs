@@ -6,7 +6,7 @@ using SpaceProgram.DataLayer.Repositories;
 namespace SpaceProgramApi.Controllers;
 
 [Route("api/spacestation")]
-public class SpaceStationsController : ControllerBase
+public class SpaceStationController : ControllerBase
 {
     private ISpaceStationRepository _spaceStationRepository = new SqlServerSpaceStationRepository();
 
@@ -23,14 +23,14 @@ public class SpaceStationsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<SpaceStation>> Post([FromBody] SpaceStation spaceStation)
+    public ActionResult Post([FromBody] SpaceStation spaceStation)
     {
         _spaceStationRepository.Create(spaceStation);
-        return Ok();
+        return Created("", spaceStation);
     }
 
     [HttpPut]
-    public ActionResult<SpaceStation> Put([FromBody] SpaceStation spaceStation)
+    public ActionResult Put([FromBody] SpaceStation spaceStation)
     {
         _spaceStationRepository.Modify(spaceStation);
         return Ok();

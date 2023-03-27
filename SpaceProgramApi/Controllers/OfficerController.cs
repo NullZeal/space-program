@@ -28,7 +28,7 @@ namespace SpaceProgramApi.Controllers
         public ActionResult Post([FromBody] Officer officer)
         {
             _officerRepository.Create(officer);
-            return Created("Created!", officer);
+            return Created("", officer);
         }
 
         [HttpPut]

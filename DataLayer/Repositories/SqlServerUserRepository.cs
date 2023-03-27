@@ -23,7 +23,8 @@ public class SqlServerUserRepository : SqlServerRepository, IUserRepository
 
     public void Modify(User user)
     {
-        Database.User.Update(user);
+        var userToModify = Database.User.Find(user.UserId);
+        Database.User.Entry(userToModify).CurrentValues.SetValues(user);
         Database.SaveChanges();
     }
 
