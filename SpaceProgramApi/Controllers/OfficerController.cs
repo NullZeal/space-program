@@ -22,18 +22,18 @@ namespace SpaceProgramApi.Controllers
         {
             return Ok(_officerRepository.Get(id));
         }
-        
-        [HttpPut("{id}")]
-        public ActionResult Put(Officer officer)
-        {
-            _officerRepository.Modify(officer);
-            return Ok();
-        }
 
         [HttpPost]
         public ActionResult Post(Officer officer)
         {
             _officerRepository.Create(officer);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult Put(Officer officer)
+        {
+            _officerRepository.Modify(officer);
             return Ok();
         }
 

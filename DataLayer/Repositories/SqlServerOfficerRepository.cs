@@ -17,13 +17,23 @@ public class SqlServerOfficerRepository : SqlServerRepository, IOfficerRepositor
 
     public void Create(Officer officer)
     {
+        Database.Officer.Add(officer);
+        Database.SaveChanges();
     }
 
     public void Modify(Officer officer)
     {
+        Database.Officer.Update(officer);
+        Database.SaveChanges();
     }
 
     public void Delete(Guid id)
     {
+        Officer officerToDelete = Database.Officer.Find(id);
+        if (officerToDelete != null)
+        {
+            Database.Remove(officerToDelete);
+        }
+        Database.SaveChanges();
     }
 }
