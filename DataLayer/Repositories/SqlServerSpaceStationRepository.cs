@@ -23,7 +23,9 @@ public class SqlServerSpaceStationRepository : SqlServerRepository, ISpaceStatio
 
     public void Modify(SpaceStation spaceStation)
     {
-        Database.SpaceStation.Update(spaceStation);
+        var spaceStationToModify = Database.SpaceStation.Find(spaceStation.SpaceStationId);
+        Database.SpaceStation.Entry(spaceStationToModify).CurrentValues.SetValues(spaceStation);
+        Database.SaveChanges();
     }
 
     public void Delete(Guid id)

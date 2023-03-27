@@ -31,7 +31,7 @@ namespace SpaceProgramApi.Controllers
             return Created("Created!", officer);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public ActionResult Put([FromBody] Officer officer)
         {
             _officerRepository.Modify(officer);
