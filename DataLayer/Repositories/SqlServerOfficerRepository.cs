@@ -23,7 +23,8 @@ public class SqlServerOfficerRepository : SqlServerRepository, IOfficerRepositor
 
     public void Modify(Officer officer)
     {
-        Database.Officer.Update(officer);
+        var officerToModify = Database.Officer.Find(officer.OfficerId);
+        Database.Officer.Entry(officerToModify).CurrentValues.SetValues(officer);
         Database.SaveChanges();
     }
 

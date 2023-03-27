@@ -1,118 +1,46 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
-//using SpaceProgram.DataLayer.EntityFramework;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SpaceProgram.DataLayer.Interfaces;
+using SpaceProgram.DataLayer.Models;
+using SpaceProgram.DataLayer.Repositories;
 
-//namespace SpaceProgramApi.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class SpaceStationsController : ControllerBase
-//    {
-//        private readonly SpaceProgramDatabase _context;
+namespace SpaceProgramApi.Controllers;
 
-//        public SpaceStationsController(SpaceProgramDatabase context)
-//        {
-//            _context = context;
-//        }
+[Route("api/spacestation")]
+public class SpaceStationsController : ControllerBase
+{
+    private ISpaceStationRepository _spaceStationRepository = new SqlServerSpaceStationRepository();
 
-//        // GET: api/SpaceStations
-//        [HttpGet]
-//        public async Task<ActionResult<IEnumerable<SpaceStation>>> GetSpaceStation()
-//        {
-//          if (_context.SpaceStations == null)
-//          {
-//              return NotFound();
-//          }
-//            return await _context.SpaceStations.ToListAsync();
-//        }
+    [HttpGet]
+    public ActionResult<IEnumerable<SpaceStation>> GetAll()
+    {
+        return Ok(_spaceStationRepository.GetAll());
+    }
 
-//        // GET: api/SpaceStations/5
-//        [HttpGet("{id}")]
-//        public async Task<ActionResult<SpaceStation>> GetSpaceStation(Guid id)
-//        {
-//          if (_context.SpaceStations == null)
-//          {
-//              return NotFound();
-//          }
-//            var spaceStation = await _context.SpaceStations.FindAsync(id);
+    [HttpGet("{id}")]
+    public ActionResult<SpaceStation> Get(Guid id)
+    {
+        return Ok(_spaceStationRepository.Get(id));
+    }
 
-//            if (spaceStation == null)
-//            {
-//                return NotFound();
-//            }
+    [HttpPut("{id}")]
+    public ActionResult<SpaceStation> Put(SpaceStation spaceStation)
+    {
+        _spaceStationRepository.Modify(spaceStation);
+        return Ok();
+    }
 
-//            return spaceStation;
-//        }
+    [HttpPost]
+    public async Task<ActionResult<SpaceStation>> PostSpaceStation(SpaceStation spaceStation)
+    {
+        _spaceStationRepository.Create(spaceStation);
+        return Ok();
+    }
 
-//        // PUT: api/SpaceStations/5
-//        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-//        [HttpPut("{id}")]
-//        public async Task<IActionResult> PutSpaceStation(Guid id, SpaceStation spaceStation)
-//        {
-//            if (id != spaceStation.SpaceStationId)
-//            {
-//                return BadRequest();
-//            }
-
-//            _context.Entry(spaceStation).State = EntityState.Modified;
-
-//            try
-//            {
-//                await _context.SaveChangesAsync();
-//            }
-//            catch (DbUpdateConcurrencyException)
-//            {
-//                if (!SpaceStationExists(id))
-//                {
-//                    return NotFound();
-//                }
-//                else
-//                {
-//                    throw;
-//                }
-//            }
-
-//            return NoContent();
-//        }
-
-//        // POST: api/SpaceStations
-//        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-//        [HttpPost]
-//        public async Task<ActionResult<SpaceStation>> PostSpaceStation(SpaceStation spaceStation)
-//        {
-//          if (_context.SpaceStations == null)
-//          {
-//              return Problem("Entity set 'SpaceProgramApiContext.SpaceStation'  is null.");
-//          }
-//            _context.SpaceStations.Add(spaceStation);
-//            await _context.SaveChangesAsync();
-
-//            return CreatedAtAction("GetSpaceStation", new { id = spaceStation.SpaceStationId }, spaceStation);
-//        }
-
-//        // DELETE: api/SpaceStations/5
-//        [HttpDelete("{id}")]
-//        public async Task<IActionResult> DeleteSpaceStation(Guid id)
-//        {
-//            if (_context.SpaceStations == null)
-//            {
-//                return NotFound();
-//            }
-//            var spaceStation = await _context.SpaceStations.FindAsync(id);
-//            if (spaceStation == null)
-//            {
-//                return NotFound();
-//            }
-
-//            _context.SpaceStations.Remove(spaceStation);
-//            await _context.SaveChangesAsync();
-
-//            return NoContent();
-//        }
-
-//        private bool SpaceStationExists(Guid id)
-//        {
-//            return (_context.SpaceStations?.Any(e => e.SpaceStationId == id)).GetValueOrDefault();
-//        }
-//    }
-//}
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteSpaceStation(Guid id)
+    {
+        _spaceStationRepository.Delete(id);
+        return Ok();
+    }
+}

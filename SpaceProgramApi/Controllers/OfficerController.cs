@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SpaceProgram.DataLayer.Interfaces;
 using SpaceProgram.DataLayer.Models;
@@ -14,7 +15,7 @@ namespace SpaceProgramApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Officer>> GetAll()
         {
-           return Ok(_officerRepository.GetAll());
+            return Ok(_officerRepository.GetAll());
         }
 
         [HttpGet("{id}")]
@@ -24,14 +25,14 @@ namespace SpaceProgramApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Officer officer)
+        public ActionResult Post([FromBody] Officer officer)
         {
             _officerRepository.Create(officer);
-            return Ok();
+            return Created("Created!", officer);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(Officer officer)
+        public ActionResult Put([FromBody] Officer officer)
         {
             _officerRepository.Modify(officer);
             return Ok();

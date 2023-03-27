@@ -21,9 +21,9 @@ public class SqlServerSpaceStationRepository : SqlServerRepository, ISpaceStatio
         Database.SaveChanges();
     }
 
-    public void Modify(SpaceStation officer)
+    public void Modify(SpaceStation spaceStation)
     {
-        throw new NotImplementedException();
+        Database.SpaceStation.Update(spaceStation);
     }
 
     public void Delete(Guid id)
