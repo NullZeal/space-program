@@ -15,6 +15,13 @@ public class SqlServerOfficerRepository : SqlServerRepository, IOfficerRepositor
         return Database.Officer.Find(id);
     }
 
+    public Officer Get(string name) 
+    {
+        var officer = Database.Officer.Where(x => x.Name == name).FirstOrDefault();
+        return officer;
+    }
+
+
     public void Create(Officer officer)
     {
         Database.Officer.Add(officer);

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Azure;
 using BusinessLayer.DtoModels;
 using BusinessLayer.Interfaces;
 using SpaceProgram.DataLayer.Interfaces;
+using SpaceProgram.DataLayer.Models;
 using SpaceProgram.DataLayer.Repositories;
 
 namespace BusinessLayer.Managers;
@@ -17,29 +19,70 @@ public class OfficerManager : IOfficerManager
         Mapper = mapper;
     }
 
-    public IList<OfficerDto> GetAll()
+    public IList<OfficerDto>?  GetAll()
     {
-        var response = OfficerRepository.GetAll();
-        return Mapper.Map<IList<OfficerDto>>(response);
+        try
+        {
+            var response = OfficerRepository.GetAll();
+            return Mapper.Map<IList<OfficerDto>>(response);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
-    public OfficerDto Get(Guid id)
+    public OfficerDto? Get(Guid id)
     {
-        throw new NotImplementedException();
+        try 
+        {
+            var response = OfficerRepository.Get(id);
+            return Mapper.Map<OfficerDto>(response);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
-    public bool Create(OfficerDto officerDto)
+    public OfficerDto? Create(OfficerDto officerDto)
     {
-        throw new NotImplementedException();
+        try
+        {
+            OfficerRepository.Create(Mapper.Map<Officer>(officerDto));
+            var response = OfficerRepository.Get(officerDto.Name);
+            return Mapper.Map<OfficerDto>(response);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
-    public bool Modify(OfficerDto officerDto)
+    public OfficerDto? Modify(OfficerDto officerDto)
     {
-        throw new NotImplementedException();
+        try
+        {
+            OfficerRepository.Modify(Mapper.Map<Officer>(officerDto));
+            return officerDto;
+        }
+        catch
+        {
+            return null;
+        }
     }
 
-    public bool Delete(Guid id)
+    public OfficerDto? Delete(Guid id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            OfficerDto officer = Mapper.Map<OfficerDto>(OfficerRepository.Get(id));
+            OfficerRepository.Delete(id);
+            return officer;
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

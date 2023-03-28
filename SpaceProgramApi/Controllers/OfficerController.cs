@@ -1,6 +1,5 @@
 ﻿using BusinessLayer.DtoModels;
 using BusinessLayer.Interfaces;
-using BusinessLayer.Managers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SpaceProgramApi.Controllers
@@ -18,41 +17,67 @@ namespace SpaceProgramApi.Controllers
         [HttpGet]
         public ActionResult<IList<OfficerDto>> GetAll()
         {
-            var officers = officerManager.GetAll();
+            var fetchedOfficers = officerManager.GetAll();
 
-            if (officers == null) 
+            if (fetchedOfficers == null) 
             { 
-                return NotFound(new { errorMessage = "Could not find any officers!" });
+                return Problem ("An error occured while trying to find the officers!");
             }
 
-            return Ok(new { officers });
+            return Ok(new { fetchedOfficers });
         }
 
-        //[HttpGet("{id}")]
-        //public ActionResult<Officer> Get(Guid id)
-        //{
-        //    return Ok(_officerRepository.Get(id));
-        //}
+        [HttpGet("{id}")]
+        public ActionResult<OfficerDto> Get(Guid id)
+        {
+            var fetchedOfficer = officerManager.Get(id);
 
-        //[HttpPost]
-        //public ActionResult Post([FromBody] Officer officer)
-        //{
-        //    _officerRepository.Create(officer);
-        //    return Created("", officer);
-        //}
+            if (fetchedOfficer == null)
+            {
+                return NotFound(new { errorMessage = "Could not find requested officer." });
+            }
 
-        //[HttpPut]
-        //public ActionResult Put([FromBody] Officer officer)
-        //{
-        //    _officerRepository.Modify(officer);
-        //    return Ok();
-        //}
+            return Ok(new { fetchedOfficer });
+        }
 
-        //[HttpDelete("{id}")]
-        //public ActionResult Delete(Guid id)
-        //{
-        //    _officerRepository.Delete(id);
-        //    return Ok();
-        //}
+        [HttpPost]
+        public ActionResult Post([FromBody] OfficerDto officer)
+        {
+            var createdOfficer = officerManager.Create(officer);
+
+            if (createdOfficer == null)
+            {
+                return Problem( "Could not create the officer.");
+            }
+
+            return Created("", new { createdOfficer });
+        }
+
+        [HttpPut]
+        public ActionResult Put([FromBody] OfficerDto officer)
+        {
+            var originalOfficer = officerManager.Get(officer.OfficerId);
+            var modifiedOfficer = officerManager.Modify(officer);
+
+            if (modifiedOfficer == null)
+            {
+                return Problem("Could not modify the officer.");
+            }
+
+            return Ok(new { originalOfficer, modifiedOfficer });
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(Guid id)
+        {
+            var deletedOfficer = officerManager.Delete(id);
+
+            if (deletedOfficer == null)
+            {
+                return Problem("Could not delete the officer.");
+            }
+            
+            return Ok(new { deletedOfficer });
+        }
     }
 }

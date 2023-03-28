@@ -6,6 +6,7 @@ public interface IOfficerRepository
 {
     public IList<Officer> GetAll();
     public Officer Get(Guid id);
+    public Officer Get(string name);
     public void Create(Officer officer);
     public void Modify(Officer officer);
     void Delete(Guid id);

@@ -5,10 +5,10 @@ namespace BusinessLayer.Interfaces
 {
     public interface IOfficerManager
     {
-        IList<OfficerDto> GetAll();
-        OfficerDto Get(Guid id);
-        bool Create(OfficerDto officerDto);
-        bool Modify(OfficerDto officerDto);
-        bool Delete(Guid id);
+        IList<OfficerDto>? GetAll();
+        OfficerDto? Get(Guid id);
+        OfficerDto? Create(OfficerDto officerDto);
+        OfficerDto? Modify(OfficerDto officerDto);
+        OfficerDto? Delete(Guid id);
     }
 }
