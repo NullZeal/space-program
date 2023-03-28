@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BusinessLayer.DtoModels;
+using SpaceProgram.BusinessLayer.DtoModels;
 using SpaceProgram.DataLayer.Models;
 
 namespace SpaceProgram.BusinessLayer.AutoMapperProfiles;

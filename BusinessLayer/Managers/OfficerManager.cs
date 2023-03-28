@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using SpaceProgram.BusinessLayer.DtoModels;
+using SpaceProgram.BusinessLayer.Interfaces;
 using SpaceProgram.DataLayer.Interfaces;
 using SpaceProgram.DataLayer.Models;
 

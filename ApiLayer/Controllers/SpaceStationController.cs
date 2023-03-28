@@ -1,42 +1,82 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SpaceProgram.BusinessLayer.DtoModels;
+using SpaceProgram.BusinessLayer.Interfaces;
 
 namespace SpaceProgram.ApiLayer.Controllers;
 
 [Route("api/spacestation")]
 public class SpaceStationController : ControllerBase
 {
-    private ISpaceStationManager SpaceStationManager { get; set; }
+    private ISpaceStationManager SpaceStationManager { get; }
+
+    public SpaceStationController(ISpaceStationManager spaceStationManager)
+    {
+        SpaceStationManager = spaceStationManager;
+    }
 
     [HttpGet]
-    public ActionResult<IEnumerable<SpaceStation>> GetAll()
+    public ActionResult<IList<SpaceStationDto>> GetAll()
     {
-        return Ok(_spaceStationRepository.GetAll());
+        var fetchedOfficers = SpaceStationManager.GetAll();
+
+        if (fetchedOfficers == null)
+        {
+            return Problem("An error occured while trying to find the officers!");
+        }
+
+        return Ok(new { fetchedOfficers });
     }
 
-    [HttpGet("{id}")]
-    public ActionResult<SpaceStation> Get(Guid id)
-    {
-        return Ok(_spaceStationRepository.Get(id));
-    }
+    //[HttpGet("{id}")]
+    //public ActionResult<OfficerDto> Get(Guid id)
+    //{
+    //    var fetchedOfficer = spaceStationManager.Get(id);
 
-    [HttpPost]
-    public ActionResult Post([FromBody] SpaceStation spaceStation)
-    {
-        _spaceStationRepository.Create(spaceStation);
-        return Created("", spaceStation);
-    }
+    //    if (fetchedOfficer == null)
+    //    {
+    //        return NotFound(new { errorMessage = "Could not find requested officer." });
+    //    }
 
-    [HttpPut]
-    public ActionResult Put([FromBody] SpaceStation spaceStation)
-    {
-        _spaceStationRepository.Modify(spaceStation);
-        return Ok();
-    }
+    //    return Ok(new { fetchedOfficer });
+    //}
 
-    [HttpDelete("{id}")]
-    public ActionResult Delete(Guid id)
-    {
-        _spaceStationRepository.Delete(id);
-        return Ok();
-    }
+    //[HttpPost]
+    //public ActionResult Post([FromBody] OfficerDto officer)
+    //{
+    //    var createdOfficer = spaceStationManager.Create(officer);
+
+    //    if (createdOfficer == null)
+    //    {
+    //        return Problem("Could not create the officer.");
+    //    }
+
+    //    return Created("", new { createdOfficer });
+    //}
+
+    //[HttpPut]
+    //public ActionResult Put([FromBody] OfficerDto officer)
+    //{
+    //    var originalOfficer = spaceStationManager.Get(officer.OfficerId);
+    //    var modifiedOfficer = spaceStationManager.Modify(officer);
+
+    //    if (modifiedOfficer == null)
+    //    {
+    //        return Problem("Could not modify the officer.");
+    //    }
+
+    //    return Ok(new { originalOfficer, modifiedOfficer });
+    //}
+
+    //[HttpDelete("{id}")]
+    //public ActionResult Delete(Guid id)
+    //{
+    //    var deletedOfficer = spaceStationManager.Delete(id);
+
+    //    if (deletedOfficer == null)
+    //    {
+    //        return Problem("Could not delete the officer.");
+    //    }
+
+    //    return Ok(new { deletedOfficer });
+    //}
 }

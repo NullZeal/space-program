@@ -1,10 +1,12 @@
-﻿namespace SpaceProgram.BusinessLayer.Inferfaces;
+﻿using SpaceProgram.BusinessLayer.DtoModels;
+
+namespace SpaceProgram.BusinessLayer.Interfaces;
 
 public interface ISpaceStationManager
 {
     IList<SpaceStationDto>? GetAll();
-    OfficerDto? Get(Guid id);
-    OfficerDto? Create(OfficerDto officerDto);
-    OfficerDto? Modify(OfficerDto officerDto);
-    OfficerDto? Delete(Guid id);
+    SpaceStationDto? Get(Guid id);
+    SpaceStationDto? Create(SpaceStationDto spaceStationDto);
+    SpaceStationDto? Modify(SpaceStationDto spaceStationDto);
+    SpaceStationDto? Delete(Guid id);
 }

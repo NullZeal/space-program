@@ -1,4 +1,6 @@
-﻿namespace SpaceProgram.BusinessLayer.Inferfaces;
+﻿using SpaceProgram.BusinessLayer.DtoModels;
+
+namespace SpaceProgram.BusinessLayer.Interfaces;
 
 public interface IOfficerManager
 {

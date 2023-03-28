@@ -1,23 +1,23 @@
-﻿using BusinessLayer.DtoModels;
-using BusinessLayer.Interfaces;
+﻿using SpaceProgram.BusinessLayer.DtoModels;
 using Microsoft.AspNetCore.Mvc;
+using SpaceProgram.BusinessLayer.Interfaces;
 
 namespace SpaceProgram.ApiLayer.Controllers;
 
 [Route("api/officer")]
 public class OfficerController : ControllerBase
 {
-    private IOfficerManager officerManager { get; }
+    private IOfficerManager OfficerManager { get; }
 
     public OfficerController(IOfficerManager officerManager)
     {
-        this.officerManager = officerManager;
+        OfficerManager = officerManager;
     }
 
     [HttpGet]
     public ActionResult<IList<OfficerDto>> GetAll()
     {
-        var fetchedOfficers = officerManager.GetAll();
+        var fetchedOfficers = OfficerManager.GetAll();
 
         if (fetchedOfficers == null) 
         { 
@@ -30,7 +30,7 @@ public class OfficerController : ControllerBase
     [HttpGet("{id}")]
     public ActionResult<OfficerDto> Get(Guid id)
     {
-        var fetchedOfficer = officerManager.Get(id);
+        var fetchedOfficer = OfficerManager.Get(id);
 
         if (fetchedOfficer == null)
         {
@@ -43,7 +43,7 @@ public class OfficerController : ControllerBase
     [HttpPost]
     public ActionResult Post([FromBody] OfficerDto officer)
     {
-        var createdOfficer = officerManager.Create(officer);
+        var createdOfficer = OfficerManager.Create(officer);
 
         if (createdOfficer == null)
         {
@@ -56,8 +56,8 @@ public class OfficerController : ControllerBase
     [HttpPut]
     public ActionResult Put([FromBody] OfficerDto officer)
     {
-        var originalOfficer = officerManager.Get(officer.OfficerId);
-        var modifiedOfficer = officerManager.Modify(officer);
+        var originalOfficer = OfficerManager.Get(officer.OfficerId);
+        var modifiedOfficer = OfficerManager.Modify(officer);
 
         if (modifiedOfficer == null)
         {
@@ -70,7 +70,7 @@ public class OfficerController : ControllerBase
     [HttpDelete("{id}")]
     public ActionResult Delete(Guid id)
     {
-        var deletedOfficer = officerManager.Delete(id);
+        var deletedOfficer = OfficerManager.Delete(id);
 
         if (deletedOfficer == null)
         {
