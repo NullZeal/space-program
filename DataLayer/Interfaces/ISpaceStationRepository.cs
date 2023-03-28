@@ -6,6 +6,7 @@ public interface ISpaceStationRepository
 {
     public IList<SpaceStation> GetAll();
     public SpaceStation Get(Guid id);
+    public SpaceStation Get(string name);
     public void Create(SpaceStation officer);
     public void Modify(SpaceStation officer);
     void Delete(Guid id);

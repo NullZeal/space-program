@@ -17,8 +17,7 @@ public class SqlServerOfficerRepository : SqlServerRepository, IOfficerRepositor
 
     public Officer Get(string name) 
     {
-        var officer = Database.Officer.Where(x => x.Name == name).FirstOrDefault();
-        return officer;
+        return Database.Officer.Where(x => x.Name == name).FirstOrDefault();
     }
 
 

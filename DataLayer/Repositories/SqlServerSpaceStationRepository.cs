@@ -15,6 +15,11 @@ public class SqlServerSpaceStationRepository : SqlServerRepository, ISpaceStatio
         return Database.SpaceStation.Find(id);
     }
 
+    public SpaceStation Get(string name)
+    {
+        return Database.SpaceStation.Where(x => x.Name == name).FirstOrDefault();
+    }
+
     public void Create(SpaceStation spaceStation)
     {
         Database.SpaceStation.Add(spaceStation);
