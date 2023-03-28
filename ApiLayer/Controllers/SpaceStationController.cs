@@ -21,7 +21,7 @@ public class SpaceStationController : ControllerBase
 
         if (fetchedSpaceStations == null)
         {
-            return Problem("An error occured while trying to find the space stations!");
+            return Problem("An error occured while trying to find the space stations.");
         }
 
         return Ok(new { fetchedSpaceStations });

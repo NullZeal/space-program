@@ -1,42 +1,82 @@
-﻿//using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SpaceProgram.BusinessLayer.DtoModels;
+using SpaceProgram.BusinessLayer.Interfaces;
 
-//namespace SpaceProgram.ApiLayer.Controllers;
+namespace SpaceProgram.ApiLayer.Controllers;
 
-//[Route("api/user")]
-//public class UserController : ControllerBase
-//{
-//    public SqlServerUserRepository _userRepository = new SqlServerUserRepository();
+[Route("api/user")]
+public class UserController : ControllerBase
+{
+    private IUserManager UserManager { get; }
 
-//    [HttpGet]
-//    public ActionResult<IEnumerable<User>> GetAll()
-//    {
-//        return Ok(_userRepository.GetAll());
-//    }
+    public UserController(IUserManager userManager)
+    {
+        UserManager = userManager;
+    }
 
-//    [HttpGet("{id}")]
-//    public ActionResult <ActionResult<User>> Get(Guid id)
-//    {
-//        return Ok(_userRepository.Get(id));
-//    }
+    [HttpGet]
+    public ActionResult<IList<UserDto>> GetAll()
+    {
+        var fetchedUsers = UserManager.GetAll();
 
-//    [HttpPost]
-//    public ActionResult Post([FromBody] User user)
-//    {
-//        _userRepository.Create(user);
-//        return Created("", user);
-//    }
+        if (fetchedUsers == null)
+        {
+            return Problem("An error occured while trying to find the users.");
+        }
 
-//    [HttpPut("{id}")]
-//    public ActionResult Put([FromBody] User user)
-//    {
-//        _userRepository.Modify(user);
-//        return Ok();
-//    }
-    
-//    [HttpDelete("{id}")]
-//    public ActionResult Delete(Guid id)
-//    {
-//        _userRepository.Delete(id);
-//        return Ok();
-//    }
-//}
+        return Ok(new { fetchedUsers });
+    }
+
+    [HttpGet("{id}")]
+    public ActionResult<UserDto> Get(Guid id)
+    {
+        var fetchedUser = UserManager.Get(id);
+
+        if (fetchedUser == null)
+        {
+            return NotFound(new { errorMessage = "Could not find requested user." });
+        }
+
+        return Ok(new { fetchedUser });
+    }
+
+    [HttpPost]
+    public ActionResult Post([FromBody] UserDto user)
+    {
+        var createdUser = UserManager.Create(user);
+
+        if (createdUser == null)
+        {
+            return Problem("Could not create the user.");
+        }
+
+        return Created("", new { createdUser });
+    }
+
+    [HttpPut("{id}")]
+    public ActionResult Put([FromBody] UserDto user)
+    {
+        var originalUser = UserManager.Get(user.UserId);
+        var modifiedUser = UserManager.Modify(user);
+
+        if (modifiedUser == null)
+        {
+            return Problem("Could not modify the user.");
+        }
+
+        return Ok(new { originalUser, modifiedUser });
+    }
+
+    [HttpDelete("{id}")]
+    public ActionResult Delete(Guid id)
+    {
+        var deletedUser = UserManager.Delete(id);
+
+        if (deletedUser == null)
+        {
+            return Problem("Could not delete the user.");
+        }
+
+        return Ok(new { deletedUser });
+    }
+}
