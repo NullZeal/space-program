@@ -15,6 +15,11 @@ public class SqlServerUserRepository : SqlServerRepository, IUserRepository
         return Database.User.Find(id);
     }
 
+    public User Get(string username)
+    {
+        return Database.User.Where(x => x.Username == username).FirstOrDefault();
+    }
+
     public void Create(User user)
     {
         Database.User.Add(user);

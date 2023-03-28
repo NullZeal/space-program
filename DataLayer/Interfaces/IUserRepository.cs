@@ -6,6 +6,7 @@ public interface IUserRepository
 {
     public IList<User> GetAll();
     public User Get(Guid id);
+    public User Get(string username);
     public void Create(User officer);
     public void Modify(User officer);
     void Delete(Guid id);

@@ -53,7 +53,7 @@ public class UserController : ControllerBase
         return Created("", new { createdUser });
     }
 
-    [HttpPut("{id}")]
+    [HttpPut]
     public ActionResult Put([FromBody] UserDto user)
     {
         var originalUser = UserManager.Get(user.UserId);
