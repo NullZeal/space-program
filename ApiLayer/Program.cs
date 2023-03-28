@@ -13,8 +13,15 @@ builder.Services.AddScoped<ISpaceStationManager, SpaceStationManager>();
 builder.Services.AddScoped<ISpaceStationRepository, SqlServerSpaceStationRepository>();
 builder.Services.AddScoped<IUserManager, UserManager>();
 builder.Services.AddScoped<IUserRepository, SqlServerUserRepository>();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
