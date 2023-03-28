@@ -57,9 +57,9 @@ public class CreateModel : PageModel
         var responseString = await httpGetResponse.Content.ReadAsStringAsync();
         var jsonObject = JObject.Parse(responseString);
 
-        foreach (var fetchedSpaceStationString in jsonObject["fetchedSpaceStations"])
+        foreach (var spaceStation in jsonObject["fetchedSpaceStations"])
         {
-            StationsList.Add(new SpaceStationDto((Guid)fetchedSpaceStationString["spaceStationId"], fetchedSpaceStationString["name"].ToString()));
+            StationsList.Add(new SpaceStationDto((Guid)spaceStation["spaceStationId"], spaceStation["name"].ToString()));
         }
     }
 }

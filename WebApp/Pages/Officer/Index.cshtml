@@ -4,7 +4,6 @@
     ViewData["Title"] = "Officer Index Page";
 }
 
-
 <a asp-page="/OfficerPages/Create" class="btn btn-success">Enroll Officer</a>
 
 <table class="table">
@@ -18,16 +17,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Officers)
+        @foreach (var officer in Model.OfficerList)
         {
             <tr>
-                <td>@item.OfficerId</td>
-                <td>@item.Name</td>
-                <td>@item.Rank</td>
-                <td>@item.SpaceStationId</td>
+                <td>@officer.OfficerId</td>
+                <td>@officer.Name</td>
+                <td>@officer.Rank</td>
+                <td>@officer.SpaceStationId</td>
                 <td>
-                    <a asp-page="/Edit" asp-route-id=@item.OfficerId class="btn btn-warning">Edit</a>
-                    <a asp-page="/Delete" asp-route-id=@item.OfficerId class="btn btn-danger">Delete</a>
+                    <a asp-page="/Edit" asp-route-id=@officer.OfficerId class="btn btn-warning">Edit</a>
+                    <a asp-page="/Delete" asp-route-id=@officer.OfficerId class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
