@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiLayer", "ApiLayer\ApiLayer.csproj", "{3CA21D1B-F4A8-47B3-AC9A-38EA08FDBFE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{80C6560C-C7C7-4ADD-ADE2-5DC690454656}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3CA21D1B-F4A8-47B3-AC9A-38EA08FDBFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CA21D1B-F4A8-47B3-AC9A-38EA08FDBFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CA21D1B-F4A8-47B3-AC9A-38EA08FDBFE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80C6560C-C7C7-4ADD-ADE2-5DC690454656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C6560C-C7C7-4ADD-ADE2-5DC690454656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C6560C-C7C7-4ADD-ADE2-5DC690454656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C6560C-C7C7-4ADD-ADE2-5DC690454656}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
