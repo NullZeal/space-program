@@ -7,9 +7,10 @@ namespace SpaceProgramWeb.Pages.OfficerPages
 {
     public class IndexModel : PageModel
     {
+        private readonly HttpClient _httpClient;
+
         public List<OfficerDto> OfficerList = new List<OfficerDto>();
         public string Error { get; set; }
-        private readonly HttpClient _httpClient;
         
         public IndexModel(HttpClient httpClient)
         {
@@ -21,17 +22,26 @@ namespace SpaceProgramWeb.Pages.OfficerPages
             await loadOfficerList();
         }
 
-        private async Task loadOfficerList()
+        private async Task<IActionResult> loadOfficerList()
         {
-            var httpGetResponse = await _httpClient.GetAsync("https://localhost:7202/api/officer");
-            httpGetResponse.EnsureSuccessStatusCode();
-
-            var responseString = await httpGetResponse.Content.ReadAsStringAsync();
-            var jsonObject = JObject.Parse(responseString);
-
-            foreach (var officer in jsonObject["fetchedOfficers"])
+            try
             {
-                OfficerList.Add(new OfficerDto((Guid)officer["officerId"], officer["name"].ToString(), officer["rank"].ToString(), (Guid)officer["spaceStationId"]));
+                var httpGetResponse = await _httpClient.GetAsync("https://localhost:7202/api/officer");
+                httpGetResponse.EnsureSuccessStatusCode();
+
+                var responseString = await httpGetResponse.Content.ReadAsStringAsync();
+                var jsonObject = JObject.Parse(responseString);
+
+                foreach (var officer in jsonObject["fetchedOfficers"])
+                {
+                    OfficerList.Add(new OfficerDto((Guid)officer["officerId"], officer["name"].ToString(), officer["rank"].ToString(), (Guid)officer["spaceStationId"]));
+                }
+                return null;
+            }
+            catch
+            {
+                Error = "Error - Could not retrieve the existing officers.";
+                return Page();
             }
         }
     }

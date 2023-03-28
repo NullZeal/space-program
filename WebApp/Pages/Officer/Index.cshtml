@@ -2,9 +2,13 @@
 @model SpaceProgramWeb.Pages.OfficerPages.IndexModel
 @{
     ViewData["Title"] = "Officer Index Page";
+    if (Model.Error != null)
+    {
+        <div class="alert alert-danger">@Model.Error</div>
+    }
 }
 
-<a asp-page="/OfficerPages/Create" class="btn btn-success">Enroll Officer</a>
+<a asp-page="/officer/Create" class="btn btn-success">Enroll a new Officer</a>
 
 <table class="table">
     <thead>

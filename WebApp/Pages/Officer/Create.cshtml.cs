@@ -9,11 +9,12 @@ namespace WebApp.Pages.Officer;
 
 public class CreateModel : PageModel
 {
+    private readonly HttpClient _httpClient;
+
     [BindProperty]
     public OfficerDto OfficerDto { get; set; }
     public List<SpaceStationDto> StationsList { get; set; } = new List<SpaceStationDto>();
     public string Error { get; set; }
-    private readonly HttpClient _httpClient;
 
     public CreateModel(HttpClient httpClient)
     {
@@ -49,17 +50,26 @@ public class CreateModel : PageModel
         return Page();
     }
 
-    private async Task loadStationList()
+    private async Task<IActionResult> loadStationList()
     {
-        var httpGetResponse = await _httpClient.GetAsync("https://localhost:7202/api/spacestation");
-        httpGetResponse.EnsureSuccessStatusCode();
-
-        var responseString = await httpGetResponse.Content.ReadAsStringAsync();
-        var jsonObject = JObject.Parse(responseString);
-
-        foreach (var spaceStation in jsonObject["fetchedSpaceStations"])
+        try
         {
-            StationsList.Add(new SpaceStationDto((Guid)spaceStation["spaceStationId"], spaceStation["name"].ToString()));
+            var httpGetResponse = await _httpClient.GetAsync("https://localhost:7202/api/spacestation");
+            httpGetResponse.EnsureSuccessStatusCode();
+
+            var responseString = await httpGetResponse.Content.ReadAsStringAsync();
+            var jsonObject = JObject.Parse(responseString);
+
+            foreach (var spaceStation in jsonObject["fetchedSpaceStations"])
+            {
+                StationsList.Add(new SpaceStationDto((Guid)spaceStation["spaceStationId"], spaceStation["name"].ToString()));
+            }
+            return null;
         }
+        catch
+        {
+            Error = "Error - Could not retrieve the existing Space Stations.";
+            return Page();
+        }      
     }
 }
