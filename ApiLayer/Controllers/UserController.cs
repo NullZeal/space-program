@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SpaceProgram.DataLayer.Interfaces;
-using SpaceProgram.DataLayer.Models;
-using SpaceProgram.DataLayer.Repositories;
 
-namespace SpaceProgramApi.Controllers;
+namespace SpaceProgram.ApiLayer.Controllers;
 
 [Route("api/user")]
 public class UserController : ControllerBase

@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Interfaces;
-using BusinessLayer.Managers;
+using SpaceProgram.BusinessLayer.Managers;
 using SpaceProgram.DataLayer.Interfaces;
 using SpaceProgram.DataLayer.Repositories;
 

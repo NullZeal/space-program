@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SpaceProgram.BusinessLayer.Managers;
 
-namespace BusinessLayer.Managers
+internal class SpaceStationManager : ISpaceStationManager
 {
-    internal class SpaceStationManager
-    {
-    }
 }

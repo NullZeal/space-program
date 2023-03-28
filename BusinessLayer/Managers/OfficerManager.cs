@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
-using Azure;
-using BusinessLayer.DtoModels;
-using BusinessLayer.Interfaces;
 using SpaceProgram.DataLayer.Interfaces;
 using SpaceProgram.DataLayer.Models;
-using SpaceProgram.DataLayer.Repositories;
 
-namespace BusinessLayer.Managers;
+namespace SpaceProgram.BusinessLayer.Managers;
 
 public class OfficerManager : IOfficerManager
 {

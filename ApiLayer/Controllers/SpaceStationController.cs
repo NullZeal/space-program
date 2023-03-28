@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SpaceProgram.DataLayer.Interfaces;
-using SpaceProgram.DataLayer.Models;
-using SpaceProgram.DataLayer.Repositories;
 
-namespace SpaceProgramApi.Controllers;
+namespace SpaceProgram.ApiLayer.Controllers;
 
 [Route("api/spacestation")]
 public class SpaceStationController : ControllerBase
 {
-    private ISpaceStationRepository _spaceStationRepository = new SqlServerSpaceStationRepository();
+    private ISpaceStationManager SpaceStationManager { get; set; }
 
     [HttpGet]
     public ActionResult<IEnumerable<SpaceStation>> GetAll()

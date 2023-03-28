@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 
-namespace BusinessLayer.AutoMapperProfiles
-{
-    public class UserProfile : Profile
-    {
+namespace SpaceProgram.BusinessLayer.AutoMapperProfiles;
 
-    }
+public class UserProfile : Profile
+{
+
 }

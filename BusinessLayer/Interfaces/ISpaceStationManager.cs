@@ -1,6 +1,10 @@
-﻿namespace BusinessLayer.Interfaces
+﻿namespace SpaceProgram.BusinessLayer.Inferfaces;
+
+public interface ISpaceStationManager
 {
-    internal class ISpaceStationManager
-    {
-    }
+    IList<SpaceStationDto>? GetAll();
+    OfficerDto? Get(Guid id);
+    OfficerDto? Create(OfficerDto officerDto);
+    OfficerDto? Modify(OfficerDto officerDto);
+    OfficerDto? Delete(Guid id);
 }
