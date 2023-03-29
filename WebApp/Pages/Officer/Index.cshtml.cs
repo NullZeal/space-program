@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json.Linq;
-using SpaceProgram.WebApp.DtoModels;
+using WebApp.Business.DtoModels;
+using WebApp.Business.ParentPageModels;
 
 namespace SpaceProgramWeb.Pages.OfficerPages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : LoginValidationModel
     {
         private readonly HttpClient _httpClient;
 
@@ -15,11 +15,7 @@ namespace SpaceProgramWeb.Pages.OfficerPages
         public IndexModel(HttpClient httpClient)
         {
             _httpClient = httpClient;
-        }
-
-        public async Task OnGet()
-        {
-            await loadOfficerList();
+            
         }
 
         private async Task<IActionResult> loadOfficerList()

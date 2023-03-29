@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SpaceProgram.WebApp.DtoModels;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text;
+using WebApp.Business.DtoModels;
+using WebApp.Business.Extensions;
 
 namespace WebApp.Pages.Officer;
 
@@ -23,6 +24,7 @@ public class CreateModel : PageModel
 
     public async Task OnGet()
     {
+        this.ValidateConnectedUser();
         await loadStationList();
     }
 

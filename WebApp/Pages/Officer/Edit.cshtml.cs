@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SpaceProgram.WebApp.DtoModels;
+using WebApp.Business.DtoModels;
 
 namespace WebApp.Pages.Officer;
 

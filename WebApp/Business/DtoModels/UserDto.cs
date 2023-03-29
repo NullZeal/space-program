@@ -1,4 +1,4 @@
-﻿namespace SpaceProgram.WebApp.DtoModels;
+﻿namespace WebApp.Business.DtoModels;
 
 public class UserDto
 {

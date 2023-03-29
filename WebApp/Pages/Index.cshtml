@@ -1,7 +1,11 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home Page";
+    if (Model.Error != null)
+    {
+        <div class="alert alert-danger">@Model.Error</div>
+    }
 }
 
 <div class="text-center">
