@@ -22,10 +22,10 @@ namespace WebApp.Pages.Officer
 
         public override async Task<IActionResult> OnGet(Guid id)
         {
-            var loadOfficerResult = await this.LoadOfficer(_httpClient, id, OfficerDto, Error);
-            if (loadOfficerResult != null) { return loadOfficerResult; }
+            var validate = await base.OnGet(id);
+            if (validate != null) { return validate; }
 
-            return await base.OnGet(id);
+            return await this.LoadOfficer(_httpClient, id, OfficerDto, Error);
         }
 
         public async Task<IActionResult> OnPost(Guid id)

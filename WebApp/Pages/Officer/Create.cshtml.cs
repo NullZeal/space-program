@@ -23,9 +23,10 @@ public class CreateModel : LoginValidationModel
     
     public override async Task<IActionResult> OnGet(Guid id)
     {
-        var result = await this.LoadSpaceStations(_httpClient, StationsList, Error);
-        if (result != null) { return result; }
-        return await base.OnGet(id);
+        var validate = await base.OnGet(id);
+        if (validate != null) { return validate; }
+
+        return await this.LoadSpaceStations(_httpClient, StationsList, Error);
     }
 
     public async Task<IActionResult> OnPost()

@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using WebApp.Business.DtoModels;
 using WebApp.Business.ParentPageModels;
 
-namespace SpaceProgramWeb.Pages.OfficerPages;
+namespace WebApp.Pages.Officer;
 
 public class IndexModel : LoginValidationModel
 {
@@ -20,11 +20,13 @@ public class IndexModel : LoginValidationModel
 
     public override async Task<IActionResult> OnGet(Guid id)
     {
-        await loadOfficerList();
-        return await base.OnGet(id);
+        var validate = await base.OnGet(id);
+        if (validate != null) { return validate; }
+
+        return await LoadOfficerList();
     }
 
-    private async Task<IActionResult> loadOfficerList()
+    private async Task<IActionResult> LoadOfficerList()
     {
         try
         {

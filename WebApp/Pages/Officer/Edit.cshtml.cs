@@ -24,13 +24,13 @@ public class EditModel : LoginValidationModel
 
     public override async Task<IActionResult> OnGet(Guid id)
     {
+        var validate = await base.OnGet(id);
+        if (validate != null) { return validate; }
+
         var loadSpaceStationsResult = await this.LoadSpaceStations(_httpClient, StationsList, Error);
         if (loadSpaceStationsResult != null) { return loadSpaceStationsResult; }
 
-        var loadOfficerResult = await this.LoadOfficer(_httpClient, id, OfficerDto, Error);
-        if (loadOfficerResult != null) { return loadOfficerResult; }
-
-        return await base.OnGet(id);
+        return await this.LoadOfficer(_httpClient, id, OfficerDto, Error);
     }
 
     public async Task<IActionResult> OnPost(Guid id)
