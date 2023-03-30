@@ -9,18 +9,19 @@
     }
 }
 
-<div class="text-center">
-    <p class="display-6 m-5 text-white">Delete a Space Station</p>
-</div>
-
-<form method="post">
-    <div class="d-flex flex-column justify-content-center align-items-center bgc-1 m-5 rounded-3 p-4">
-
-        <div class="form-group m-3 w-50 text-center">
-            <label class="text-white" asp-for="@Model.SpaceStation.Name"></label>
-            <p asp-for="@Model.SpaceStation.Name" class="bg-white rounded  text-lg-center fs-3">@Model.SpaceStation.Name</p>
-        </div>
-
-        <button type="submit" class="btn btn-danger btn-lg mt-4">Delete</button>
+<body class="bgcb-3">
+    <div class="text-center">
+        <p class="display-6 m-5 text-white">Delete a Space Station</p>
     </div>
-</form>
+    <form method="post">
+        <div class="d-flex flex-column justify-content-center align-items-center bgc-1 m-5 rounded-3 p-4">
+
+            <div class="form-group m-3 w-50 text-center">
+                <label class="text-white" asp-for="@Model.SpaceStation.Name"></label>
+                <p asp-for="@Model.SpaceStation.Name" class="bg-white rounded  text-lg-center fs-3">@Model.SpaceStation.Name</p>
+            </div>
+
+            <button type="submit" class="btn btn-danger btn-lg mt-4">Delete</button>
+        </div>
+    </form>
+</body>

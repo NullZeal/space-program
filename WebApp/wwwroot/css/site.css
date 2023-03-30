@@ -19,6 +19,7 @@ html {
 
 body {
     margin-bottom: 60px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: #003459;
 }
 
@@ -26,27 +27,46 @@ header {
     background-color:#FFE300;
 }
 
-.bgc-1 {
+.bgcb-1 {
     background-color: #00171f;
 }
 
-.bgc-2 {
+.bgcb-2 {
     background-color: #003459;
 }
 
-.bgc-3 {
+.bgcb-3 {
+    background-color: #00296b;
+}
+
+.bgcb-4 {
+    background-color: #003f88;
+}
+
+.bgcb-5 {
+    background-color: #00509d;
+}
+
+.bgcb-6 {
     background-color: #007ea7;
 }
 
-.bgc-4 {
+.bgcb-7 {
     background-color: #00a8e8;
 }
 
-.no-drag {
-    -webkit-user-drag: none;
-    -moz-user-select: none;
-    user-drag: none;
-    user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+.bgc-gold-1 {
+    background-color: #fdc500;
+}
+
+.bgc-gold-2 {
+    background-color: #ffd500;
+}
+
+.bgc-black-1 {
+    background-color: rgb(43, 42, 51);
+}
+
+.bgc-black-2 {
+    background-color: #101010;
 }

@@ -10,9 +10,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bgc-black-2 border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">SpaceProgram</a>
+                <a class="navbar-brand text-white" asp-area="" asp-page="/Index">SpaceProgram</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -24,19 +24,19 @@
                         @if (Context.Request.Cookies["currentUserUsername"] != null && Context.Request.Cookies["currentUserUsername"] != "")
                         {
                             <li class="nav-item ms-2">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/officer/index">Officers</a>
+                                <a class="nav-link text-white" asp-area="" asp-page="/officer/index">Officers</a>
                             </li>
 
                             <li class="nav-item ms-2">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/spacestation/index">Space Stations</a>
+                                <a class="nav-link text-white" asp-area="" asp-page="/spacestation/index">Space Stations</a>
                             </li>
 
                             <li class="nav-item ms-auto">
-                                <a class="nav-link text-dark right" asp-area="" asp-page="/index">Welcome @Context.Request.Cookies["currentUserUsername"].ToUpper()</a>
+                                <a class="nav-link right text-white" asp-area="" asp-page="/index">Welcome @Context.Request.Cookies["currentUserUsername"].ToUpper()</a>
                             </li>
 
                             <li class="nav-item ms-5">
-                                <a class="btn bg-dark text-white" asp-page="/disconnect">Logout</a> 
+                                <a class="btn bg-dark text-white" asp-page="/disconnect">Logout</a>
                             </li>
                         }
                     </ul>
@@ -50,7 +50,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bgc-black-2">
         <div class="container text-white">
             &copy; 2023 - SpaceProgram - by Julien Pontbriand
         </div>

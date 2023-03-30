@@ -1,4 +1,4 @@
-﻿@page "{action?}"
+﻿@page
 @model SpaceProgramWeb.Pages.SpaceStation.IndexModel
 @{
     ViewData["Title"] = "Space Stations";
@@ -8,33 +8,36 @@
     }
 }
 
-<div class="text-center">
-    <p class="display-6 m-5 text-white">Space Stations</p>
-</div>
+<body class="bgcb-3">
+    <div class="text-center">
+        <p class="display-6 m-5 text-white">Space Stations</p>
+    </div>
 
-<a asp-page="/spacestation/create" class="btn btn-info btn-lg mt-4 mb-4">Create a Space Station</a>
+    <a asp-page="/spacestation/create" class="btn btn-info btn-lg mt-4 mb-4">Create a Space Station</a>
 
-<table class="table text-white">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>@{
-
-        foreach (var spaceStation in Model.SpaceStations.OrderBy(x => x.Name).ToList())
-        {
+    <table class="table text-white">
+        <thead>
             <tr>
-                <td>@spaceStation.SpaceStationId</td>
-                <td>@spaceStation.Name</td>
-                <td>
-                        <a asp-page="/spacestation/edit" asp-route-id=@spaceStation.SpaceStationId class="btn btn-info">Edit</a>
-                        <a asp-page="/spacestation/delete" asp-route-id=@spaceStation.SpaceStationId class="btn btn-danger">Delete</a>
-                </td>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
             </tr>
-        }
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @{
+                foreach (var spaceStation in Model.SpaceStations.OrderBy(x => x.Name).ToList())
+                {
+                    <tr>
+                        <td>@spaceStation.SpaceStationId</td>
+                        <td>@spaceStation.Name</td>
+                        <td>
+                            <a asp-page="/spacestation/edit" asp-route-id=@spaceStation.SpaceStationId class="btn btn-info">Edit</a>
+                            <a asp-page="/spacestation/delete" asp-route-id=@spaceStation.SpaceStationId class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</body>

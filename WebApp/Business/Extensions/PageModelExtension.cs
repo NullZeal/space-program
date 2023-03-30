@@ -76,7 +76,6 @@ public static class PageModelExtension
         }
     }
 
-
     public async static Task<IActionResult> LoadSpaceStations(
         this PageModel someModel, 
         HttpClient _httpClient, 

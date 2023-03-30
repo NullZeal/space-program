@@ -7,38 +7,40 @@
         <div class="alert alert-danger">@Model.Error</div>
     }
 }
+<body>
+    <div class="text-center">
+        <p class="display-6 m-5 text-white">Enrolled Officers</p>
+    </div>
 
-<div class="text-center">
-    <p class="display-6 m-5 text-white">Enrolled Officers</p>
-</div>
+    <a asp-page="/officer/Create" class="btn btn-info btn-lg mt-4 mb-4">Enroll a new Officer</a>
 
-<a asp-page="/officer/Create" class="btn btn-info btn-lg mt-4 mb-4">Enroll a new Officer</a>
-
-<table class="table text-white">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Rank</th>
-            <th>Station Id</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>@{
-
-        foreach (var officer in Model.OfficerList.OrderBy(x => x.Name).ToList())
-        {
+    <table class="table text-white">
+        <thead>
             <tr>
-                <td>@officer.OfficerId</td>
-                <td>@officer.Name</td>
-                <td>@officer.Rank</td>
-                <td>@officer.SpaceStationId</td>
-                <td>
-                    <a asp-page="/officer/edit" asp-route-id=@officer.OfficerId class="btn btn-info">Edit</a>
-                    <a asp-page="/officer/delete" asp-route-id=@officer.OfficerId class="btn btn-danger">Delete</a>
-                </td>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Rank</th>
+                <th>Station Id</th>
+                <th>Actions</th>
             </tr>
-        }
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @{
+
+                foreach (var officer in Model.OfficerList.OrderBy(x => x.Name).ToList())
+                {
+                    <tr>
+                        <td>@officer.OfficerId</td>
+                        <td>@officer.Name</td>
+                        <td>@officer.Rank</td>
+                        <td>@officer.SpaceStationId</td>
+                        <td>
+                            <a asp-page="/officer/edit" asp-route-id=@officer.OfficerId class="btn btn-info">Edit</a>
+                            <a asp-page="/officer/delete" asp-route-id=@officer.OfficerId class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
