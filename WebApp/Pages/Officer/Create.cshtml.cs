@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text;
 using WebApp.Business.DtoModels;
 using WebApp.Business.ParentPageModels;
+using WebApp.Business.Extensions;
 
 namespace WebApp.Pages.Officer;
 
@@ -20,15 +20,18 @@ public class CreateModel : LoginValidationModel
     {
         _httpClient = httpClient;
     }
-
+    
     public override async Task<IActionResult> OnGet()
     {
+        var result = await this.LoadSpaceStations(_httpClient, StationsList, Error);
+        if (result != null) { return result; }
         return await base.OnGet();
     }
 
     public async Task<IActionResult> OnPost()
     {
-        await loadStationList();
+        var result = await this.LoadSpaceStations(_httpClient, StationsList, Error);
+        if (result != null) { return result; }
 
         if (ModelState.IsValid)
         {
@@ -40,7 +43,7 @@ public class CreateModel : LoginValidationModel
                 var httpPostResponse = await _httpClient.PostAsync("https://localhost:7202/api/officer/", officerContent);
                 httpPostResponse.EnsureSuccessStatusCode();
 
-                return RedirectToPage("/Index");
+                return RedirectToPage("/officer/index");
             }
             catch(Exception ex)
             {
@@ -48,28 +51,5 @@ public class CreateModel : LoginValidationModel
             }
         }
         return Page();
-    }
-
-    private async Task<IActionResult> loadStationList()
-    {
-        try
-        {
-            var httpGetResponse = await _httpClient.GetAsync("https://localhost:7202/api/spacestation");
-            httpGetResponse.EnsureSuccessStatusCode();
-
-            var responseString = await httpGetResponse.Content.ReadAsStringAsync();
-            var jsonObject = JObject.Parse(responseString);
-
-            foreach (var spaceStation in jsonObject["fetchedSpaceStations"])
-            {
-                StationsList.Add(new SpaceStationDto((Guid)spaceStation["spaceStationId"], spaceStation["name"].ToString()));
-            }
-            return null;
-        }
-        catch
-        {
-            Error = "Error - Could not retrieve the existing Space Stations.";
-            return Page();
-        }      
     }
 }

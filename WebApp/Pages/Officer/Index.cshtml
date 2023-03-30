@@ -8,9 +8,13 @@
     }
 }
 
-<a asp-page="/officer/Create" class="btn btn-success">Enroll a new Officer</a>
+<div class="text-center">
+    <p class="display-6 m-5 text-white">Enrolled Officers</p>
+</div>
 
-<table class="table">
+<a asp-page="/officer/Create" class="btn btn-info btn-lg mt-4 mb-4">Enroll a new Officer</a>
+
+<table class="table text-white">
     <thead>
         <tr>
             <th>ID</th>
@@ -20,8 +24,9 @@
             <th>Actions</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var officer in Model.OfficerList)
+    <tbody>@{
+
+        foreach (var officer in Model.OfficerList.OrderBy(x => x.Name).ToList())
         {
             <tr>
                 <td>@officer.OfficerId</td>
@@ -29,10 +34,11 @@
                 <td>@officer.Rank</td>
                 <td>@officer.SpaceStationId</td>
                 <td>
-                    <a asp-page="/Edit" asp-route-id=@officer.OfficerId class="btn btn-warning">Edit</a>
+                    <a asp-page="/Edit" asp-route-id=@officer.OfficerId class="btn btn-info">Edit</a>
                     <a asp-page="/Delete" asp-route-id=@officer.OfficerId class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
+    }
     </tbody>
 </table>

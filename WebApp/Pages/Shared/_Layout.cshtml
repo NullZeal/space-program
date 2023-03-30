@@ -28,18 +28,16 @@
                             </li>
 
                             <li class="nav-item ms-auto">
-                                <a class="nav-link text-dark right" asp-area="" asp-page="/index">Welcome @Context.Request.Cookies["currentUserUsername"]</a>
+                                <a class="nav-link text-dark right" asp-area="" asp-page="/index">Welcome @Context.Request.Cookies["currentUserUsername"].ToUpper()</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="btn btn-danger" asp-page="/disconnect">Logout</a> 
+                            <li class="nav-item ms-5">
+                                <a class="btn bg-dark text-white" asp-page="/disconnect">Logout</a> 
                             </li>
                         }
                     </ul>
                 </div>
             </div>
-
-            
         </nav>
     </header>
     <div class="container">

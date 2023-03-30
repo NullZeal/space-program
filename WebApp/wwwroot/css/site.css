@@ -26,4 +26,19 @@ header {
     background-color:#FFE300;
 }
 
-/*Hex Codes: #ffffff // #00171f // #003459 // #007ea7 // #00a8e8*/
+.bgc-1 {
+    background-color: #00171f;
+}
+
+.bgc-2 {
+    background-color: #003459;
+}
+
+.bgc-3 {
+    background-color: #007ea7;
+}
+
+.bgc-4 {
+    background-color: #00a8e8;
+}
+
