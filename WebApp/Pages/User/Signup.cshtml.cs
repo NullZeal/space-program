@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using System.Security.Cryptography;
 using System.Text;
 using WebApp.Business.DtoModels;
 
@@ -26,6 +27,8 @@ namespace WebApp.Pages.User
             {
                 try
                 {
+                    HashPassword();
+                    
                     string currentUserString = JsonConvert.SerializeObject(CurrentUser, Formatting.None);
                     HttpContent userContent = new StringContent(currentUserString, Encoding.UTF8, "application/json");
 
@@ -40,6 +43,18 @@ namespace WebApp.Pages.User
                 }
             }
             return Page();
+        }
+
+        private void HashPassword()
+        {
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+            var pbkdf2 = new Rfc2898DeriveBytes(CurrentUser.Password, salt, 100000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+            CurrentUser.Password = Convert.ToBase64String(hashBytes);
         }
     }
 }

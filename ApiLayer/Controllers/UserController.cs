@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SpaceProgram.BusinessLayer.DtoModels;
 using SpaceProgram.BusinessLayer.Interfaces;
+using System.Security.Cryptography;
 
 namespace SpaceProgram.ApiLayer.Controllers;
 
@@ -51,14 +52,29 @@ public class UserController : ControllerBase
             return NotFound(new { errorMessage = "Could not find requested user." });
         }
 
-        var requestedUser = fetchedUsers.FirstOrDefault(x => x.Username == user.Username && x.Password == user.Password);
+        var requestedUser = fetchedUsers.FirstOrDefault(x => x.Username == user.Username);
 
         if (requestedUser == null)
         {
             return NotFound(new { errorMessage = "Username not found." });
         }
 
+        VerifyPasswordHash(user, requestedUser);
+
         return Ok(requestedUser.UserId);
+    }
+
+    private static void VerifyPasswordHash(UserDto user, UserDto? requestedUser)
+    {
+        string savedPasswordHash = requestedUser.Password;
+        byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
+        byte[] salt = new byte[16];
+        Array.Copy(hashBytes, 0, salt, 0, 16);
+        var pbkdf2 = new Rfc2898DeriveBytes(user.Password, salt, 100000);
+        byte[] hash = pbkdf2.GetBytes(20);
+        for (int i = 0; i < 20; i++)
+            if (hashBytes[i + 16] != hash[i])
+                throw new UnauthorizedAccessException();
     }
 
     [HttpPost]
