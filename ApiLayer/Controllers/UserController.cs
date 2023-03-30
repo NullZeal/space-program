@@ -40,6 +40,27 @@ public class UserController : ControllerBase
         return Ok(new { fetchedUser });
     }
 
+    [Route("username")]
+    [HttpPost]
+    public ActionResult<OfficerDto> Get([FromBody] UserDto user)
+    {
+        var fetchedUsers = UserManager.GetAll();
+
+        if (fetchedUsers == null)
+        {
+            return NotFound(new { errorMessage = "Could not find requested user." });
+        }
+
+        var requestedUser = fetchedUsers.FirstOrDefault(x => x.Username == user.Username && x.Password == user.Password);
+
+        if (requestedUser == null)
+        {
+            return NotFound(new { errorMessage = "Username not found." });
+        }
+
+        return Ok(requestedUser.UserId);
+    }
+
     [HttpPost]
     public ActionResult Post([FromBody] UserDto user)
     {

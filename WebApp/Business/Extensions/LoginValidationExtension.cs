@@ -9,7 +9,7 @@ public static class LoginValidationExtension
     {
         if (someModel.Request.Cookies["currentUser"] == null || someModel.Request.Cookies["currentUser"] == "")
         {
-            return someModel.RedirectToPage("/login");
+            return someModel.RedirectToPage("/user/login");
         }
         return null;
     }

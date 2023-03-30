@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text;
 using WebApp.Business.DtoModels;
-using WebApp.Business.Extensions;
+using WebApp.Business.ParentPageModels;
 
 namespace WebApp.Pages.Officer;
 
-public class CreateModel : PageModel
+public class CreateModel : LoginValidationModel
 {
     private readonly HttpClient _httpClient;
 
@@ -22,10 +21,9 @@ public class CreateModel : PageModel
         _httpClient = httpClient;
     }
 
-    public async Task OnGet()
+    public override async Task<IActionResult> OnGet()
     {
-        this.ValidateConnectedUser();
-        await loadStationList();
+        return await base.OnGet();
     }
 
     public async Task<IActionResult> OnPost()
