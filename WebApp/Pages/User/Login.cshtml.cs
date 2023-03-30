@@ -43,9 +43,9 @@ public class LoginModel : PageModel
 
                 return RedirectToPage("/Index");
             }
-            catch (Exception ex)
+            catch
             {
-                Error = ex.Message;
+                Error = "Invalid credentials. Please review username and password information.";
             }
         }
         return Page();
