@@ -37,7 +37,7 @@ public class LoginModel : PageModel
                 Response.Cookies.Append("currentUser", userId);
                 Response.Cookies.Append("currentUserUsername", CurrentUser.Username);
 
-                return RedirectToPage("/Index");
+                return RedirectToPage("/index");
             }
             catch
             {
