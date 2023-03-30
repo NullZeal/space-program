@@ -6,7 +6,7 @@ namespace WebApp.Business.ParentPageModels;
 
 public abstract class LoginValidationModel : PageModel
 {
-    public virtual async Task<IActionResult> OnGet()
+    public virtual async Task<IActionResult> OnGet(Guid id)
     {
         return this.ValidateConnectedUser();
     }

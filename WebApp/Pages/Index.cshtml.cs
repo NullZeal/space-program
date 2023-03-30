@@ -14,8 +14,8 @@ public class IndexModel : LoginValidationModel
         _logger = logger;
     }
 
-    public override async Task<IActionResult> OnGet()
+    public override async Task<IActionResult> OnGet(Guid id)
     {
-        return await base.OnGet();
+        return await base.OnGet(id);
     }
 }

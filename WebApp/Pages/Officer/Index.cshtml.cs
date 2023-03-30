@@ -18,10 +18,10 @@ public class IndexModel : LoginValidationModel
         
     }
 
-    public override async Task<IActionResult> OnGet()
+    public override async Task<IActionResult> OnGet(Guid id)
     {
         await loadOfficerList();
-        return await base.OnGet();
+        return await base.OnGet(id);
     }
 
     private async Task<IActionResult> loadOfficerList()

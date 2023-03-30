@@ -21,11 +21,11 @@ public class CreateModel : LoginValidationModel
         _httpClient = httpClient;
     }
     
-    public override async Task<IActionResult> OnGet()
+    public override async Task<IActionResult> OnGet(Guid id)
     {
         var result = await this.LoadSpaceStations(_httpClient, StationsList, Error);
         if (result != null) { return result; }
-        return await base.OnGet();
+        return await base.OnGet(id);
     }
 
     public async Task<IActionResult> OnPost()

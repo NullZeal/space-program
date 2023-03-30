@@ -42,3 +42,11 @@ header {
     background-color: #00a8e8;
 }
 
+.no-drag {
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+    user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}

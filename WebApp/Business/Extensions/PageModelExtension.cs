@@ -5,7 +5,7 @@ using WebApp.Business.DtoModels;
 
 namespace WebApp.Business.Extensions;
 
-public static class LoginValidationExtension
+public static class PageModelExtension
 {
     public static IActionResult ValidateConnectedUser(this PageModel someModel)
     {
@@ -15,6 +15,38 @@ public static class LoginValidationExtension
         }
         return null;
     }
+
+    public async static Task<IActionResult> LoadOfficer(
+        this PageModel someModel,
+        HttpClient _httpClient,
+        Guid officerId,
+        OfficerDto officer,
+        string error)
+    {
+        try
+        {
+            var httpGetResponse = await _httpClient.GetAsync($"https://localhost:7202/api/officer/{officerId}");
+            httpGetResponse.EnsureSuccessStatusCode();
+
+            var responseString = await httpGetResponse.Content.ReadAsStringAsync();
+            var jsonObject = JObject.Parse(responseString);
+
+            var fetchedOfficer = jsonObject["fetchedOfficer"];
+
+            officer.OfficerId = (Guid)fetchedOfficer["officerId"];
+            officer.Name = (string)fetchedOfficer["name"];
+            officer.Rank = (string)fetchedOfficer["rank"];
+            officer.SpaceStationId = (Guid)fetchedOfficer["spaceStationId"];
+            
+            return null;
+        }
+        catch
+        {
+            error = "Error - Could not retrieve the user.";
+            return someModel.Page();
+        }
+    }
+
 
     public async static Task<IActionResult> LoadSpaceStations(
         this PageModel someModel, 
