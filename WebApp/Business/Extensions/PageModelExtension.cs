@@ -16,6 +16,35 @@ public static class PageModelExtension
         return null;
     }
 
+    public async static Task<IActionResult> LoadSpaceStation(
+        this PageModel someModel,
+        HttpClient _httpClient,
+        Guid spaceStationId,
+        SpaceStationDto spaceStation,
+        string error)
+    {
+        try
+        {
+            var httpGetResponse = await _httpClient.GetAsync($"https://localhost:7202/api/spacestation/{spaceStationId}");
+            httpGetResponse.EnsureSuccessStatusCode();
+
+            var responseString = await httpGetResponse.Content.ReadAsStringAsync();
+            var jsonObject = JObject.Parse(responseString);
+
+            var fetchedSpaceStation = jsonObject["fetchedSpaceStation"];
+
+            spaceStation.SpaceStationId = (Guid)fetchedSpaceStation["spaceStationId"];
+            spaceStation.Name = (string)fetchedSpaceStation["name"];
+
+            return null;
+        }
+        catch
+        {
+            error = "Error - Could not retrieve the Space Station.";
+            return someModel.Page();
+        }
+    }
+
     public async static Task<IActionResult> LoadOfficer(
         this PageModel someModel,
         HttpClient _httpClient,
@@ -42,7 +71,7 @@ public static class PageModelExtension
         }
         catch
         {
-            error = "Error - Could not retrieve the user.";
+            error = "Error - Could not retrieve the Officer.";
             return someModel.Page();
         }
     }

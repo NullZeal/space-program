@@ -1,0 +1,27 @@
+﻿@page
+@using WebApp.Business.DtoModels;
+@model EditModel
+@{
+    ViewData["Title"] = "Edit Space Station";
+    if (Model.Error != null)
+    {
+        <div class="alert alert-danger">@Model.Error</div>
+    }
+}
+
+<div class="text-center">
+    <p class="display-6 m-5 text-white">Modify a Space Station</p>
+</div>
+
+<form method="post">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+
+        <div class="form-group m-3 w-50">
+            <label class="text-white" asp-for="@Model.SpaceStation.Name"></label>
+            <input asp-for="@Model.SpaceStation.Name" class="form-control" />
+            <span asp-validation-for="@Model.SpaceStation.Name" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-info btn-lg mt-4">Modify</button>
+    </div>
+</form>
