@@ -11,7 +11,7 @@ namespace WebApp.Pages
             {
                 Response.Cookies.Delete(cookie.Key);
             }
-            return Redirect("/index");
+            return Redirect("/user/login");
         }
     }
 }
