@@ -18,5 +18,12 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #003459;
 }
+
+header {
+    background-color:#FFE300;
+}
+
+/*Hex Codes: #ffffff // #00171f // #003459 // #007ea7 // #00a8e8*/
