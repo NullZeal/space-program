@@ -10,15 +10,14 @@ public class LoginModel : PageModel
 {
     private readonly HttpClient _httpClient;
 
+    [BindProperty]
+    public UserDto User { get; set; }
+    public string Error { get; set; }
+
     public LoginModel(HttpClient httpClient)
     {
         _httpClient = httpClient;
     }
-
-    [BindProperty]
-    public UserDto CurrentUser { get; set; }
-
-    public string Error { get; set; }
 
     public async Task<IActionResult> OnPost()
     {
@@ -26,7 +25,7 @@ public class LoginModel : PageModel
         {
             try
             {
-                string currentUserString = JsonConvert.SerializeObject(CurrentUser, Formatting.None);
+                string currentUserString = JsonConvert.SerializeObject(User, Formatting.None);
                 HttpContent userContent = new StringContent(currentUserString, Encoding.UTF8, "application/json");
 
                 var httpPostResponse = await _httpClient.PostAsync("https://localhost:7202/api/user/username", userContent);
@@ -35,7 +34,7 @@ public class LoginModel : PageModel
                 string userId = httpPostResponse.Content.ReadAsStringAsync().Result;
 
                 Response.Cookies.Append("currentUser", userId);
-                Response.Cookies.Append("currentUserUsername", CurrentUser.Username);
+                Response.Cookies.Append("currentUserUsername", User.Username);
 
                 return RedirectToPage("/index");
             }

@@ -10,7 +10,7 @@ namespace WebApp.Pages.Officer
         private readonly HttpClient _httpClient;
 
         [BindProperty]
-        public OfficerDto OfficerDto { get; set; } = new OfficerDto();
+        public OfficerDto Officer { get; set; } = new OfficerDto();
         public string Error { get; set; }
 
         public DeleteModel(HttpClient httpClient)
@@ -23,12 +23,12 @@ namespace WebApp.Pages.Officer
             var validate = await base.OnGet(id);
             if (validate != null) { return validate; }
 
-            return await this.LoadOfficer(_httpClient, id, OfficerDto, Error);
+            return await this.LoadOfficer(_httpClient, id, Officer, Error);
         }
 
         public async Task<IActionResult> OnPost(Guid id)
         {
-            var validate = await this.LoadOfficer(_httpClient, id, OfficerDto, Error);
+            var validate = await this.LoadOfficer(_httpClient, id, Officer, Error);
             if (validate != null) { return validate; }
 
             try

@@ -11,15 +11,14 @@ namespace WebApp.Pages.User
     {
         private readonly HttpClient _httpClient;
 
+        [BindProperty]
+        public UserDto User { get; set; }
+        public string Error { get; set; }
+
         public SignupModel(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
-
-        [BindProperty]
-        public UserDto CurrentUser { get; set; }
-
-        public string Error { get; set; }
 
         public async Task<IActionResult> OnPost()
         {
@@ -29,7 +28,7 @@ namespace WebApp.Pages.User
                 {
                     HashPassword();
                     
-                    string currentUserString = JsonConvert.SerializeObject(CurrentUser, Formatting.None);
+                    string currentUserString = JsonConvert.SerializeObject(User, Formatting.None);
                     HttpContent userContent = new StringContent(currentUserString, Encoding.UTF8, "application/json");
 
                     var httpPostResponse = await _httpClient.PostAsync("https://localhost:7202/api/user", userContent);
@@ -49,12 +48,12 @@ namespace WebApp.Pages.User
         {
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-            var pbkdf2 = new Rfc2898DeriveBytes(CurrentUser.Password, salt, 100000);
+            var pbkdf2 = new Rfc2898DeriveBytes(User.Password, salt, 100000);
             byte[] hash = pbkdf2.GetBytes(20);
             byte[] hashBytes = new byte[36];
             Array.Copy(salt, 0, hashBytes, 0, 16);
             Array.Copy(hash, 0, hashBytes, 16, 20);
-            CurrentUser.Password = Convert.ToBase64String(hashBytes);
+            User.Password = Convert.ToBase64String(hashBytes);
         }
     }
 }

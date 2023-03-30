@@ -12,7 +12,7 @@ public class CreateModel : LoginValidationModel
     private readonly HttpClient _httpClient;
 
     [BindProperty]
-    public OfficerDto OfficerDto { get; set; }
+    public OfficerDto Officer { get; set; }
     public List<SpaceStationDto> StationsList { get; set; } = new List<SpaceStationDto>();
     public string Error { get; set; }
 
@@ -38,7 +38,7 @@ public class CreateModel : LoginValidationModel
         {
             try
             {
-                string officerString = JsonConvert.SerializeObject(OfficerDto, Formatting.None);
+                string officerString = JsonConvert.SerializeObject(Officer, Formatting.None);
                 HttpContent officerContent = new StringContent(officerString, Encoding.UTF8, "application/json");
                 
                 var httpPostResponse = await _httpClient.PostAsync("https://localhost:7202/api/officer/", officerContent);

@@ -17,14 +17,14 @@
     <form method="post">
         <div class="row d-flex justify-content-center">
             <div class="form-group col-md-4">
-                <label class="text-white" asp-for="@Model.CurrentUser.Username"></label>
-                <input asp-for="@Model.CurrentUser.Username" class="form-control" />
-                <span asp-validation-for="@Model.CurrentUser.Username" class="text-danger"></span>
+                <label class="text-white" asp-for="@Model.User.Username"></label>
+                <input asp-for="@Model.User.Username" class="form-control" />
+                <span asp-validation-for="@Model.User.Username" class="text-danger"></span>
             </div>
             <div class="form-group col-md-4">
-                <label class="text-white" asp-for="@Model.CurrentUser.Password"></label>
-                <input type="password" asp-for="@Model.CurrentUser.Password" class="form-control" />
-                <span asp-validation-for="@Model.CurrentUser.Password" class="text-danger"></span>
+                <label class="text-white" asp-for="@Model.User.Password"></label>
+                <input type="password" asp-for="@Model.User.Password" class="form-control" />
+                <span asp-validation-for="@Model.User.Password" class="text-danger"></span>
             </div>
         </div>
 

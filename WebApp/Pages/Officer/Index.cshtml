@@ -26,8 +26,7 @@
         </thead>
         <tbody>
             @{
-
-                foreach (var officer in Model.OfficerList.OrderBy(x => x.Name).ToList())
+                foreach (var officer in Model.Officers.OrderBy(x => x.Name).ToList())
                 {
                     <tr>
                         <td>@officer.OfficerId</td>

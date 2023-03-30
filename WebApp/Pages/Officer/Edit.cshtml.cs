@@ -13,7 +13,7 @@ public class EditModel : LoginValidationModel
     private readonly HttpClient _httpClient;
 
     [BindProperty]
-    public OfficerDto OfficerDto { get; set; } = new OfficerDto();
+    public OfficerDto Officer { get; set; } = new OfficerDto();
     public List<SpaceStationDto> StationsList { get; set; } = new List<SpaceStationDto>();
     public string Error { get; set; }
 
@@ -30,12 +30,12 @@ public class EditModel : LoginValidationModel
         var loadSpaceStationsResult = await this.LoadSpaceStations(_httpClient, StationsList, Error);
         if (loadSpaceStationsResult != null) { return loadSpaceStationsResult; }
 
-        return await this.LoadOfficer(_httpClient, id, OfficerDto, Error);
+        return await this.LoadOfficer(_httpClient, id, Officer, Error);
     }
 
     public async Task<IActionResult> OnPost(Guid id)
     {
-        OfficerDto.OfficerId = id;
+        Officer.OfficerId = id;
 
         var result = await this.LoadSpaceStations(_httpClient, StationsList, Error);
         if (result != null) { return result; }
@@ -44,7 +44,7 @@ public class EditModel : LoginValidationModel
         {
             try
             {
-                string officerString = JsonConvert.SerializeObject(OfficerDto, Formatting.None);
+                string officerString = JsonConvert.SerializeObject(Officer, Formatting.None);
                 HttpContent officerContent = new StringContent(officerString, Encoding.UTF8, "application/json");
 
                 var httpPostResponse = await _httpClient.PutAsync("https://localhost:7202/api/officer/", officerContent);

@@ -17,20 +17,20 @@
     <div class="d-flex flex-column justify-content-center align-items-center">
 
         <div class="form-group m-3 w-50">
-            <label class="text-white" asp-for="@Model.OfficerDto.Name"></label>
-            <input asp-for="@Model.OfficerDto.Name" class="form-control" />
-            <span asp-validation-for="@Model.OfficerDto.Name" class="text-danger"></span>
+            <label class="text-white" asp-for="@Model.Officer.Name"></label>
+            <input asp-for="@Model.Officer.Name" class="form-control" />
+            <span asp-validation-for="@Model.Officer.Name" class="text-danger"></span>
         </div>
 
         <div class="form-group m-3 w-50">
-            <label class="text-white" asp-for="@Model.OfficerDto.Rank"></label>
-            <input asp-for="@Model.OfficerDto.Rank" class="form-control" />
-            <span asp-validation-for="@Model.OfficerDto.Rank" class="text-danger"></span>
+            <label class="text-white" asp-for="@Model.Officer.Rank"></label>
+            <input asp-for="@Model.Officer.Rank" class="form-control" />
+            <span asp-validation-for="@Model.Officer.Rank" class="text-danger"></span>
         </div>
 
         <div class="form-group m-3 w-50">
-            <label class="text-white" asp-for="@Model.OfficerDto.SpaceStationId">Space Station</label>
-            <select asp-for="@Model.OfficerDto.SpaceStationId" class="form-select" aria-label="Default select example">
+            <label class="text-white" asp-for="@Model.Officer.SpaceStationId">Space Station</label>
+            <select asp-for="@Model.Officer.SpaceStationId" class="form-select" aria-label="Default select example">
                 <option selected>Select a Space Station</option>
                 @{
                     foreach (SpaceStationDto ss in Model.StationsList.OrderBy(x => x.Name).ToList())
@@ -39,7 +39,7 @@
                     }
                 }
             </select>
-            <span asp-validation-for="@Model.OfficerDto.SpaceStationId" class="text-danger"></span>
+            <span asp-validation-for="@Model.Officer.SpaceStationId" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-info btn-lg mt-4">Modify</button>

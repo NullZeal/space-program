@@ -9,13 +9,12 @@ public class IndexModel : LoginValidationModel
 {
     private readonly HttpClient _httpClient;
 
-    public List<OfficerDto> OfficerList = new List<OfficerDto>();
+    public List<OfficerDto> Officers = new List<OfficerDto>();
     public string Error { get; set; }
     
     public IndexModel(HttpClient httpClient)
     {
         _httpClient = httpClient;
-        
     }
 
     public override async Task<IActionResult> OnGet(Guid id)
@@ -38,7 +37,7 @@ public class IndexModel : LoginValidationModel
 
             foreach (var officer in jsonObject["fetchedOfficers"])
             {
-                OfficerList.Add(new OfficerDto((Guid)officer["officerId"], officer["name"].ToString(), officer["rank"].ToString(), (Guid)officer["spaceStationId"]));
+                Officers.Add(new OfficerDto((Guid)officer["officerId"], officer["name"].ToString(), officer["rank"].ToString(), (Guid)officer["spaceStationId"]));
             }
             return null;
         }
