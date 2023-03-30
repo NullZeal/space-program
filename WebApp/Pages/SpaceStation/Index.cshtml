@@ -31,7 +31,7 @@
                 <td>@spaceStation.Name</td>
                 <td>
                         <a asp-page="/spacestation/edit" asp-route-id=@spaceStation.SpaceStationId class="btn btn-info">Edit</a>
-                        <a asp-page="/spacestation/delete" asp-route-id=@spaceStation.Name class="btn btn-danger">Delete</a>
+                        <a asp-page="/spacestation/delete" asp-route-id=@spaceStation.SpaceStationId class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
