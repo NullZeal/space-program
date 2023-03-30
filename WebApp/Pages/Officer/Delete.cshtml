@@ -1,0 +1,35 @@
+﻿@page
+@model WebApp.Pages.Officer.DeleteModel
+
+@{
+    if (Model.Error != null)
+    {
+        <div class="alert alert-danger">@Model.Error</div>
+    }
+}
+
+<div class="text-center">
+    <p class="display-6 m-5 text-white">Delete an Officer</p>
+</div>
+
+<form method="post">
+    <div class="d-flex flex-column justify-content-center align-items-center bgc-1 m-5 rounded-3 p-4">
+
+        <div class="form-group m-3 w-50 text-center">
+            <label class="text-white" asp-for="@Model.OfficerDto.Name"></label>
+            <p asp-for="@Model.OfficerDto.Name" class="bg-white rounded  text-lg-center fs-3">@Model.OfficerDto.Name</p>
+        </div>
+
+        <div class="form-group m-3 w-50 text-center">
+            <label class="text-white" asp-for="@Model.OfficerDto.Rank"></label>
+            <p asp-for="@Model.OfficerDto.Rank" class="bg-white rounded  text-lg-center fs-3">@Model.OfficerDto.Rank</p>
+        </div>
+
+        <div class="form-group m-3 w-50 text-center">
+            <label class="text-white" asp-for="@Model.OfficerDto.SpaceStationId">Space Station ID</label>
+            <p asp-for="@Model.OfficerDto.SpaceStationId" class="bg-white rounded  text-lg-center fs-3">@Model.OfficerDto.SpaceStationId</p>
+        </div>
+
+        <button type="submit" class="btn btn-danger btn-lg mt-4">Delete</button>
+    </div>
+</form>
