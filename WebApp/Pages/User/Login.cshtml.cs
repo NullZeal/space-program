@@ -20,12 +20,8 @@ public class LoginModel : PageModel
 
     public string Error { get; set; }
 
-
-
     public async Task<IActionResult> OnPost()
     {
-
-
         if (ModelState.IsValid)
         {
             try

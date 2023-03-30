@@ -1,4 +1,36 @@
 ﻿@page
 @model WebApp.Pages.User.SignupModel
+
 @{
+    if (Model.Error != null)
+    {
+        <div class="alert alert-danger text-center">@Model.Error</div>
+    }
 }
+
+<div class="text-center">
+    <p class="display-6 m-5">Sign In</p>
+</div>
+
+<form method="post">
+    <div class="row d-flex justify-content-center">
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.CurrentUser.Username"></label>
+            <input asp-for="@Model.CurrentUser.Username" class="form-control" />
+            <span asp-validation-for="@Model.CurrentUser.Username" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.CurrentUser.Password"></label>
+            <input type="password" asp-for="@Model.CurrentUser.Password" class="form-control" />
+            <span asp-validation-for="@Model.CurrentUser.Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <button type="submit" class="btn btn-success w-50 m-4 btn-lg">Sign Up</button>
+    </div>
+</form>
+
+<div class="d-flex justify-content-center">
+    <a asp-page="/user/login" class="btn btn-primary text-center mt-3 btn-lg w-40">Or login instead!</a>
+</div>
